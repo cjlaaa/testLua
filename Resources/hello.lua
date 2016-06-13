@@ -8,6 +8,9 @@ function __G__TRACKBACK__(msg)
     print("----------------------------------------")
 end
 
+local test = MyClass:new()
+print(test:foo(99))
+
 local function main()
     -- avoid memory leak
     collectgarbage("setpause", 100)

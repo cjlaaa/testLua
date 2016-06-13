@@ -4,6 +4,7 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "Lua_extensions_CCB.h"
+#include "MyLuaModule.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #include "Lua_web_socket.h"
 #endif
@@ -25,6 +26,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
+    
+    CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
+    pDirector->setOpenGLView(pEGLView);
+    pEGLView->setDesignResolutionSize(640, 1136, kResolutionNoBorder);
+    
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
 
     // turn on display FPS
@@ -40,6 +46,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCLuaStack *pStack = pEngine->getLuaStack();
     lua_State *tolua_s = pStack->getLuaState();
     tolua_extensions_ccb_open(tolua_s);
+    tolua_MyLuaModule_open(tolua_s);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     pStack = pEngine->getLuaStack();
     tolua_s = pStack->getLuaState();

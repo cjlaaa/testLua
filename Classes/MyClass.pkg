@@ -1,0 +1,5 @@
+class MyClass
+{
+  MyClass();
+  int foo(int i);
+};
