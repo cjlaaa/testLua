@@ -1,3 +1,4 @@
 $#include "MyLuaModule.h"
 
 $pfile "MyClass.pkg"
+$pfile "HelloWorldScene.pkg"

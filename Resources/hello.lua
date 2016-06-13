@@ -201,6 +201,10 @@ local function main()
     local sceneGame = CCScene:create()
     sceneGame:addChild(createLayerFarm())
     sceneGame:addChild(createLayerMenu())
+
+    local hellworld = HelloWorld:scene()
+    sceneGame:addChild(hellworld)
+
     CCDirector:sharedDirector():runWithScene(sceneGame)
 end
 

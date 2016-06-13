@@ -47,6 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State *tolua_s = pStack->getLuaState();
     tolua_extensions_ccb_open(tolua_s);
     tolua_MyLuaModule_open(tolua_s);
+//    tolua_HelloWorldScene_open(tolua_s);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     pStack = pEngine->getLuaStack();
     tolua_s = pStack->getLuaState();

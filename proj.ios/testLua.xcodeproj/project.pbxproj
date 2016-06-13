@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0F127D141D0D8C3A00B6256A /* MyClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F127D101D0D8C3A00B6256A /* MyClass.cpp */; };
 		0F127D151D0D8C3A00B6256A /* MyLuaModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F127D121D0D8C3A00B6256A /* MyLuaModule.cpp */; };
+		0F127D2D1D0E6E5C00B6256A /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F127D2B1D0E6E5C00B6256A /* HelloWorldScene.cpp */; };
+		0F127D301D0E6E7400B6256A /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F127D2E1D0E6E7400B6256A /* CloseNormal.png */; };
+		0F127D311D0E6E7400B6256A /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F127D2F1D0E6E7400B6256A /* HelloWorld.png */; };
+		0F127D331D0E6EB100B6256A /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F127D321D0E6EB100B6256A /* CloseSelected.png */; };
 		15C153F71683112E00D239F2 /* CCBAnimationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */; };
 		15C153F81683112E00D239F2 /* CCBFileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537E1683112E00D239F2 /* CCBFileLoader.cpp */; };
 		15C153F91683112E00D239F2 /* CCBKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C153801683112E00D239F2 /* CCBKeyframe.cpp */; };
@@ -232,6 +236,12 @@
 		0F127D111D0D8C3A00B6256A /* MyClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyClass.h; path = ../Classes/MyClass.h; sourceTree = "<group>"; };
 		0F127D121D0D8C3A00B6256A /* MyLuaModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MyLuaModule.cpp; path = ../Classes/MyLuaModule.cpp; sourceTree = "<group>"; };
 		0F127D131D0D8C3A00B6256A /* MyLuaModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLuaModule.h; path = ../Classes/MyLuaModule.h; sourceTree = "<group>"; };
+		0F127D2A1D0E6E5B00B6256A /* AppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMacros.h; path = ../Classes/AppMacros.h; sourceTree = "<group>"; };
+		0F127D2B1D0E6E5C00B6256A /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = ../Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
+		0F127D2C1D0E6E5C00B6256A /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = ../Classes/HelloWorldScene.h; sourceTree = "<group>"; };
+		0F127D2E1D0E6E7400B6256A /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
+		0F127D2F1D0E6E7400B6256A /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
+		0F127D321D0E6EB100B6256A /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBAnimationManager.cpp; sourceTree = "<group>"; };
 		15C1537D1683112E00D239F2 /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
@@ -1359,6 +1369,9 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0F127D2A1D0E6E5B00B6256A /* AppMacros.h */,
+				0F127D2B1D0E6E5C00B6256A /* HelloWorldScene.cpp */,
+				0F127D2C1D0E6E5C00B6256A /* HelloWorldScene.h */,
 				0F127D101D0D8C3A00B6256A /* MyClass.cpp */,
 				0F127D111D0D8C3A00B6256A /* MyClass.h */,
 				0F127D121D0D8C3A00B6256A /* MyLuaModule.cpp */,
@@ -1372,6 +1385,9 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F127D321D0E6EB100B6256A /* CloseSelected.png */,
+				0F127D2E1D0E6E7400B6256A /* CloseNormal.png */,
+				0F127D2F1D0E6E7400B6256A /* HelloWorld.png */,
 				1AC3622316D47C5C000847F2 /* background.mp3 */,
 				1AC3622416D47C5C000847F2 /* background.ogg */,
 				1AC3622516D47C5C000847F2 /* crop.png */,
@@ -1472,10 +1488,13 @@
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
 				1AC3622F16D47C5C000847F2 /* background.mp3 in Resources */,
 				1AC3623016D47C5C000847F2 /* background.ogg in Resources */,
+				0F127D311D0E6E7400B6256A /* HelloWorld.png in Resources */,
 				1AC3623116D47C5C000847F2 /* crop.png in Resources */,
+				0F127D331D0E6EB100B6256A /* CloseSelected.png in Resources */,
 				1AC3623216D47C5C000847F2 /* dog.png in Resources */,
 				1AC3623316D47C5C000847F2 /* effect1.wav in Resources */,
 				1AC3623416D47C5C000847F2 /* farm.jpg in Resources */,
+				0F127D301D0E6E7400B6256A /* CloseNormal.png in Resources */,
 				1AC3623516D47C5C000847F2 /* fonts in Resources */,
 				1AC3623616D47C5C000847F2 /* hello.lua in Resources */,
 				1AC3623716D47C5C000847F2 /* hello2.lua in Resources */,
@@ -1648,6 +1667,7 @@
 				1A40E7E71727C47E006D4861 /* BoneData.cpp in Sources */,
 				1A40E7E81727C47E006D4861 /* extension.cpp in Sources */,
 				1A40E7E91727C47E006D4861 /* Json.cpp in Sources */,
+				0F127D2D1D0E6E5C00B6256A /* HelloWorldScene.cpp in Sources */,
 				1A40E7EA1727C47E006D4861 /* RegionAttachment.cpp in Sources */,
 				1A40E7EB1727C47E006D4861 /* Skeleton.cpp in Sources */,
 				1A40E7EC1727C47E006D4861 /* SkeletonData.cpp in Sources */,

@@ -1,0 +1,9 @@
+
+#include "cocos2d.h"
+
+class HelloWorld : public CCLayer
+{
+    virtual bool init();  
+    static CCScene* scene();
+    static HelloWorld* create();
+};
