@@ -1,5 +1,5 @@
 # testLua
-在cocos2dx中使用自定义类.
+在cocos2d-Lua中使用自定义类.
 
 - 测试环境:cocos2d-x 2.1.4 & Xcode 7.3.1
 - 系统环境:OS X 10.11.5
