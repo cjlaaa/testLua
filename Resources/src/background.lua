@@ -6,6 +6,9 @@ ccb["Background"] = Background
 local function OnBtnClicked()
 	local animationMgr = tolua.cast(Background["mAnimationManager"],"CCBAnimationManager")
     animationMgr:runAnimationsForSequenceNamedTweenDuration("right", 0.1)
+
+    local bg = tolua.cast(Background["background"],"CCSprite")
+    print(bg:getPositionX().." "..bg:getPositionY())
 end
 Background["onBtnClick"] = OnBtnClicked
 
