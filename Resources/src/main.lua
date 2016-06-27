@@ -1,4 +1,5 @@
 require "src/extern"   --导入模板，作用调用其class函数
+require "src/background"
 local s = CCDirector:sharedDirector():getWinSize()
 
 MainScene = class("MainScene",
@@ -35,5 +36,7 @@ local sceneGame = CCScene:create()
 local sp = MainScene:createMS("Default-568h@2x.png",1)
 sp:setPosition( ccp(s.width/2,s.height/2))
 sceneGame:addChild( sp,0)
+
+sceneGame:addChild(BackgroundLayer())
 
 CCDirector:sharedDirector():runWithScene(sceneGame)
