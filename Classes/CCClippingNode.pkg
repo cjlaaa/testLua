@@ -1,0 +1,11 @@
+#include "base_nodes/CCNode.h"
+#include "CCGL.h"
+
+class CCClippingNode : public CCNode
+{
+    static CCClippingNode* create();
+    void setStencil(CCNode *pStencil);
+
+    bool isInverted() const;
+    void setInverted(bool bInverted);
+};

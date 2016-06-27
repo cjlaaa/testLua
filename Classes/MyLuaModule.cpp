@@ -1,6 +1,6 @@
 /*
 ** Lua binding: MyLuaModule
-** Generated automatically by tolua++-1.0.92 on Mon Jun 13 12:34:55 2016.
+** Generated automatically by tolua++-1.0.92 on Mon Jun 27 18:15:06 2016.
 */
 
 #ifndef __cplusplus
@@ -30,9 +30,11 @@ static int tolua_collect_MyClass (lua_State* tolua_S)
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
- tolua_usertype(tolua_S,"CCScene");
- tolua_usertype(tolua_S,"HelloWorld");
  tolua_usertype(tolua_S,"CCLayer");
+ tolua_usertype(tolua_S,"HelloWorld");
+ tolua_usertype(tolua_S,"CCNode");
+ tolua_usertype(tolua_S,"CCClippingNode");
+ tolua_usertype(tolua_S,"CCScene");
  tolua_usertype(tolua_S,"MyClass");
 }
 
@@ -174,7 +176,7 @@ static int tolua_MyLuaModule_HelloWorld_scene00(lua_State* tolua_S)
 #endif
  {
   {
-      cocos2d::CCScene* tolua_ret = (cocos2d::CCScene*)  HelloWorld::scene();
+   CCScene* tolua_ret = (CCScene*)  HelloWorld::scene();
     tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCScene");
   }
  }
@@ -215,6 +217,132 @@ static int tolua_MyLuaModule_HelloWorld_create00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: create of class  CCClippingNode */
+#ifndef TOLUA_DISABLE_tolua_MyLuaModule_CCClippingNode_create00
+static int tolua_MyLuaModule_CCClippingNode_create00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCClippingNode",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   CCClippingNode* tolua_ret = (CCClippingNode*)  CCClippingNode::create();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCClippingNode");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'create'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setStencil of class  CCClippingNode */
+#ifndef TOLUA_DISABLE_tolua_MyLuaModule_CCClippingNode_setStencil00
+static int tolua_MyLuaModule_CCClippingNode_setStencil00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCClippingNode",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"CCNode",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCClippingNode* self = (CCClippingNode*)  tolua_tousertype(tolua_S,1,0);
+  CCNode* pStencil = ((CCNode*)  tolua_tousertype(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setStencil'", NULL);
+#endif
+  {
+   self->setStencil(pStencil);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setStencil'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: isInverted of class  CCClippingNode */
+#ifndef TOLUA_DISABLE_tolua_MyLuaModule_CCClippingNode_isInverted00
+static int tolua_MyLuaModule_CCClippingNode_isInverted00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const CCClippingNode",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const CCClippingNode* self = (const CCClippingNode*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'isInverted'", NULL);
+#endif
+  {
+   bool tolua_ret = (bool)  self->isInverted();
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'isInverted'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setInverted of class  CCClippingNode */
+#ifndef TOLUA_DISABLE_tolua_MyLuaModule_CCClippingNode_setInverted00
+static int tolua_MyLuaModule_CCClippingNode_setInverted00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCClippingNode",0,&tolua_err) ||
+     !tolua_isboolean(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCClippingNode* self = (CCClippingNode*)  tolua_tousertype(tolua_S,1,0);
+  bool bInverted = ((bool)  tolua_toboolean(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setInverted'", NULL);
+#endif
+  {
+   self->setInverted(bInverted);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setInverted'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_MyLuaModule_open (lua_State* tolua_S)
 {
@@ -238,6 +366,13 @@ TOLUA_API int tolua_MyLuaModule_open (lua_State* tolua_S)
    tolua_function(tolua_S,"init",tolua_MyLuaModule_HelloWorld_init00);
    tolua_function(tolua_S,"scene",tolua_MyLuaModule_HelloWorld_scene00);
    tolua_function(tolua_S,"create",tolua_MyLuaModule_HelloWorld_create00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"CCClippingNode","CCClippingNode","CCNode",NULL);
+  tolua_beginmodule(tolua_S,"CCClippingNode");
+   tolua_function(tolua_S,"create",tolua_MyLuaModule_CCClippingNode_create00);
+   tolua_function(tolua_S,"setStencil",tolua_MyLuaModule_CCClippingNode_setStencil00);
+   tolua_function(tolua_S,"isInverted",tolua_MyLuaModule_CCClippingNode_isInverted00);
+   tolua_function(tolua_S,"setInverted",tolua_MyLuaModule_CCClippingNode_setInverted00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

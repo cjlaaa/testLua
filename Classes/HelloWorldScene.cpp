@@ -90,6 +90,19 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
     
+//    CCClippingNode * clippingNodeLeft = CCClippingNode::create();
+//    addChild(clippingNodeLeft);
+//    clippingNodeLeft->addChild(pSprite,0);
+//    CCDrawNode *shapeLeft = CCDrawNode::create();
+//    static CCPoint triangleLeft[3];
+//    triangleLeft[0] = ccp(0, 0);
+//    triangleLeft[1] = ccp(visibleSize.width,0);
+//    triangleLeft[2] = ccp(0,visibleSize.height);
+//    static ccColor4F green = {0, 1, 0, 1};
+//    shapeLeft->drawPolygon(triangleLeft, 3, green, 0, green);
+//    clippingNodeLeft->setStencil(shapeLeft);
+//    clippingNodeLeft->setInverted(false);
+    
     return true;
 }
 

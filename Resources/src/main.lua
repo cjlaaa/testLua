@@ -33,10 +33,25 @@ end
 
 local sceneGame = CCScene:create()
 
-local sp = MainScene:createMS("Default-568h@2x.png",1)
-sp:setPosition( ccp(s.width/2,s.height/2))
-sceneGame:addChild( sp,0)
+-- local sp = MainScene:createMS("Default-568h@2x.png",1)
+-- sp:setPosition( ccp(s.width/2,s.height/2))
+-- sceneGame:addChild( sp,0)
 
-sceneGame:addChild(BackgroundLayer())
+-- local hellworld = HelloWorld:scene()
+-- sceneGame:addChild(hellworld)
+
+-- local ccbLayer = BackgroundLayer()
+-- ccbLayer:setPosition(ccp(s.width/2,s.height/2))
+-- hellworld:addChild(ccbLayer)
+
+local clippingNode = CCClippingNode:create();
+sceneGame:addChild(clippingNode);
+local bg = CCSprite:create("Default-568h@2x.png");
+bg:setPosition(ccp(s.width/2,s.height/2))
+clippingNode:addChild(bg);
+local stencil = CCSprite:create("Icon-144.png")
+stencil:setPosition(ccp(s.width/2,s.height/2))
+clippingNode:setStencil(stencil);
+clippingNode:setInverted(true)
 
 CCDirector:sharedDirector():runWithScene(sceneGame)
