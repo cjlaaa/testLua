@@ -13,6 +13,7 @@
 		0F127D301D0E6E7400B6256A /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F127D2E1D0E6E7400B6256A /* CloseNormal.png */; };
 		0F127D311D0E6E7400B6256A /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F127D2F1D0E6E7400B6256A /* HelloWorld.png */; };
 		0F127D331D0E6EB100B6256A /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F127D321D0E6EB100B6256A /* CloseSelected.png */; };
+		0F3364EA1D20E2720072631C /* src in Resources */ = {isa = PBXBuildFile; fileRef = 0F3364E91D20E2720072631C /* src */; };
 		15C153F71683112E00D239F2 /* CCBAnimationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */; };
 		15C153F81683112E00D239F2 /* CCBFileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537E1683112E00D239F2 /* CCBFileLoader.cpp */; };
 		15C153F91683112E00D239F2 /* CCBKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C153801683112E00D239F2 /* CCBKeyframe.cpp */; };
@@ -242,6 +243,7 @@
 		0F127D2E1D0E6E7400B6256A /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		0F127D2F1D0E6E7400B6256A /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		0F127D321D0E6EB100B6256A /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
+		0F3364E91D20E2720072631C /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBAnimationManager.cpp; sourceTree = "<group>"; };
 		15C1537D1683112E00D239F2 /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
@@ -1385,6 +1387,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F3364E91D20E2720072631C /* src */,
 				0F127D321D0E6EB100B6256A /* CloseSelected.png */,
 				0F127D2E1D0E6E7400B6256A /* CloseNormal.png */,
 				0F127D2F1D0E6E7400B6256A /* HelloWorld.png */,
@@ -1503,6 +1506,7 @@
 				1AC3623A16D47C5C000847F2 /* menu2.png in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
+				0F3364EA1D20E2720072631C /* src in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
