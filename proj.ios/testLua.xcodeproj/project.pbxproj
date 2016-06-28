@@ -16,7 +16,6 @@
 		0F3364EA1D20E2720072631C /* src in Resources */ = {isa = PBXBuildFile; fileRef = 0F3364E91D20E2720072631C /* src */; };
 		0F3364EE1D210F790072631C /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 0F3364EC1D210F790072631C /* ccb */; };
 		0F3364EF1D210F790072631C /* ccbResources in Resources */ = {isa = PBXBuildFile; fileRef = 0F3364ED1D210F790072631C /* ccbResources */; };
-		0F9ADD261D213DFD001EB7D4 /* stencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ADD251D213DFD001EB7D4 /* stencil.png */; };
 		15C153F71683112E00D239F2 /* CCBAnimationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */; };
 		15C153F81683112E00D239F2 /* CCBFileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537E1683112E00D239F2 /* CCBFileLoader.cpp */; };
 		15C153F91683112E00D239F2 /* CCBKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C153801683112E00D239F2 /* CCBKeyframe.cpp */; };
@@ -249,7 +248,6 @@
 		0F3364E91D20E2720072631C /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		0F3364EC1D210F790072631C /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
 		0F3364ED1D210F790072631C /* ccbResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccbResources; sourceTree = "<group>"; };
-		0F9ADD251D213DFD001EB7D4 /* stencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stencil.png; sourceTree = "<group>"; };
 		15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBAnimationManager.cpp; sourceTree = "<group>"; };
 		15C1537D1683112E00D239F2 /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
@@ -1393,7 +1391,6 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0F9ADD251D213DFD001EB7D4 /* stencil.png */,
 				0F3364EC1D210F790072631C /* ccb */,
 				0F3364ED1D210F790072631C /* ccbResources */,
 				0F3364E91D20E2720072631C /* src */,
@@ -1515,7 +1512,6 @@
 				1AC3623816D47C5C000847F2 /* land.png in Resources */,
 				1AC3623916D47C5C000847F2 /* menu1.png in Resources */,
 				1AC3623A16D47C5C000847F2 /* menu2.png in Resources */,
-				0F9ADD261D213DFD001EB7D4 /* stencil.png in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
 				0F3364EA1D20E2720072631C /* src in Resources */,
