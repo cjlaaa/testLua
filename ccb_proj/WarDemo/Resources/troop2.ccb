@@ -15,7 +15,7 @@
 	<key>guides</key>
 	<array/>
 	<key>jsControlled</key>
-	<false/>
+	<true/>
 	<key>nodeGraph</key>
 	<dict>
 		<key>baseClass</key>
@@ -1965,8 +1965,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -2554,6 +2552,8 @@
 		<string></string>
 		<key>displayName</key>
 		<string>CCSprite</string>
+		<key>jsController</key>
+		<string>troop2</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
 		<key>memberVarAssignmentType</key>

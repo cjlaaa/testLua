@@ -21,8 +21,9 @@ function Background:createLeftClippingNode()
 	local points = CCPointArray:create(3)
 	points:addControlPoint(ccp(0,0))
 	points:addControlPoint(ccp(s.width,0))
-	points:addControlPoint(ccp(0,s.height))
-	stencil:drawPolygon(points,3,ccColor4F:new(),0,ccColor4F:new());
+	points:addControlPoint(ccp(s.width,s.height*(1/3)))
+	points:addControlPoint(ccp(0,s.height*(2/3)))
+	stencil:drawPolygon(points,4,ccColor4F:new(),0,ccColor4F:new());
 	clippingNode:setStencil(stencil);
 	clippingNode:setInverted(true)
 	clippingNode:addChild(layer);
@@ -40,9 +41,10 @@ function Background:createRightClippingNode()
 	local stencil = CCDrawNode:create()
 	local points = CCPointArray:create(3)
 	points:addControlPoint(ccp(s.width,s.height))
-	points:addControlPoint(ccp(s.width,0))
 	points:addControlPoint(ccp(0,s.height))
-	stencil:drawPolygon(points,3,ccColor4F:new(),0,ccColor4F:new());
+	points:addControlPoint(ccp(0,s.height*(2/3)))
+	points:addControlPoint(ccp(s.width,s.height*(1/3)))
+	stencil:drawPolygon(points,4,ccColor4F:new(),0,ccColor4F:new());
 	clippingNode:setStencil(stencil);
 	clippingNode:setInverted(true)
 	clippingNode:addChild(layer);
@@ -52,7 +54,7 @@ function Background:createRightClippingNode()
     animationMgr:runAnimationsForSequenceNamedTweenDuration("left", 0.01)
 end
   
-function Background:create(fileName,_type)      --自定义构造函数
+function Background:create()      --自定义构造函数
     local Background = Background.new()
 
     Background:createLeftClippingNode();

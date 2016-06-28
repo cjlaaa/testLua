@@ -278,7 +278,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>60</real>
+						<real>30</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -300,6 +300,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

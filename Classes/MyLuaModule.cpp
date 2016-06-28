@@ -484,10 +484,11 @@ static int tolua_MyLuaModule_CCDrawNode_drawPolygon00(lua_State* tolua_S)
   float borderWidth = ((float)  tolua_tonumber(tolua_S,5,0));
   const ccColor4F* borderColor = ((const ccColor4F*)  tolua_tousertype(tolua_S,6,0));
      
-     static CCPoint triangle[3];
+     static CCPoint triangle[4];
      triangle[0] = verts->getControlPointAtIndex(0);
      triangle[1] = verts->getControlPointAtIndex(1);
      triangle[2] = verts->getControlPointAtIndex(2);
+     triangle[3] = verts->getControlPointAtIndex(3);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'drawPolygon'", NULL);
 #endif
