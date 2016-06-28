@@ -77,16 +77,22 @@ function Unit:Init(unitType)
 	local  node  = CCBReaderLoad(strFile,proxy,true,strName)
     local  layer = tolua.cast(node,"CCLayer")
     self:addChild(layer)
-    self:fire()
+    self:play("fire")
 end
 
-function Unit:fire()
+function Unit:play(strStatus)
 	if(self.Type==UnitType.UnitTypeCarMine)then
 		local animationMgr = tolua.cast(CarMineCCB["mAnimationManager"],"CCBAnimationManager")
-	    animationMgr:runAnimationsForSequenceNamed("fire")
+	    animationMgr:runAnimationsForSequenceNamed(strStatus)
+	elseif(self.Type==UnitType.UnitTypeCarEnemy)then
+		local animationMgr = tolua.cast(CarEnemyCCB["mAnimationManager"],"CCBAnimationManager")
+	    animationMgr:runAnimationsForSequenceNamed(strStatus)
+	elseif(self.Type==UnitType.UnitTypeTroopMine)then
+		local animationMgr = tolua.cast(TroopMineCCB["mAnimationManager"],"CCBAnimationManager")
+	    animationMgr:runAnimationsForSequenceNamed(strStatus)
     elseif(self.Type==UnitType.UnitTypeTroopEnemy)then
 		local animationMgr = tolua.cast(TroopEnemyCCB["mAnimationManager"],"CCBAnimationManager")
-	    animationMgr:runAnimationsForSequenceNamed("fire")
+	    animationMgr:runAnimationsForSequenceNamed(strStatus)
 	end
 end
 
@@ -108,7 +114,7 @@ end
 
 function UnitsLayer:Init()
 	for i=1,6 do
-		self.unit[i] = Unit:create(UnitType.UnitTypeCarMine)
+		self.unit[i] = Unit:create(UnitType.UnitTypeTroopMine)
 		self.unit[i]:setPosition(unitPos[i])
 	    self:addChild(self.unit[i])
 	end
