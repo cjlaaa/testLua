@@ -1,17 +1,17 @@
 require "CCBReaderLoad"
 local s = CCDirector:sharedDirector():getWinSize()
 
--- CarMineCCB = CarMineCCB or {}
--- ccb["car1"] = CarMineCCB
+CarMineCCB = CarMineCCB or {}
+ccb["car1"] = CarMineCCB
 
--- CarEnemyCCB = CarEnemyCCB or {}
--- ccb["car2"] = CarEnemyCCB
+CarEnemyCCB = CarEnemyCCB or {}
+ccb["car2"] = CarEnemyCCB
 
--- TroopMineCCB = TroopMineCCB or {}
--- ccb["car2"] = TroopMineCCB
+TroopMineCCB = TroopMineCCB or {}
+ccb["troop1"] = TroopMineCCB
 
--- TroopEnemyCCB = TroopEnemyCCB or {}
--- ccb["car2"] = TroopEnemyCCB
+TroopEnemyCCB = TroopEnemyCCB or {}
+ccb["troop2"] = TroopEnemyCCB
 
 local UnitType =
 {
@@ -44,6 +44,9 @@ Unit = class("Unit",
     end
 )
 
+Unit.__index = Unit
+Unit.Type = nil;
+
 function Unit:create(unitType) 
     local Unit = Unit.new()
     Unit:Init(unitType);
@@ -52,6 +55,8 @@ function Unit:create(unitType)
 end
 
 function Unit:Init(unitType)
+	self.Type = unitType
+
 	local strFile = "";
 	local strName = "";
 	if unitType==UnitType.UnitTypeCarMine then
@@ -60,12 +65,29 @@ function Unit:Init(unitType)
 	elseif unitType==UnitType.UnitTypeCarEnemy then
 		strFile = "ccb/car2.ccbi";
 		strName = "car2"
+	elseif unitType==UnitType.UnitTypeTroopMine then
+		strFile = "ccb/troop1.ccbi";
+		strName = "troop1"
+	elseif unitType==UnitType.UnitTypeTroopEnemy then
+		strFile = "ccb/troop2.ccbi";
+		strName = "troop2"
 	end
 
 	local  proxy = CCBProxy:create()
 	local  node  = CCBReaderLoad(strFile,proxy,true,strName)
     local  layer = tolua.cast(node,"CCLayer")
     self:addChild(layer)
+    self:fire()
+end
+
+function Unit:fire()
+	if(self.Type==UnitType.UnitTypeCarMine)then
+		local animationMgr = tolua.cast(CarMineCCB["mAnimationManager"],"CCBAnimationManager")
+	    animationMgr:runAnimationsForSequenceNamed("fire")
+    elseif(self.Type==UnitType.UnitTypeTroopEnemy)then
+		local animationMgr = tolua.cast(TroopEnemyCCB["mAnimationManager"],"CCBAnimationManager")
+	    animationMgr:runAnimationsForSequenceNamed("fire")
+	end
 end
 
 UnitsLayer = class("UnitsLayer",
@@ -73,6 +95,9 @@ UnitsLayer = class("UnitsLayer",
         return CCLayer:create() 
     end
 )
+
+UnitsLayer.__index = UnitsLayer
+UnitsLayer.unit = {};
 
 function UnitsLayer:create() 
     local UnitsLayer = UnitsLayer.new()
@@ -83,14 +108,14 @@ end
 
 function UnitsLayer:Init()
 	for i=1,6 do
-		local unit = Unit:create(UnitType.UnitTypeCarMine)
-		unit:setPosition(unitPos[i])
-	    self:addChild(unit)
+		self.unit[i] = Unit:create(UnitType.UnitTypeCarMine)
+		self.unit[i]:setPosition(unitPos[i])
+	    self:addChild(self.unit[i])
 	end
 
 	for i=7,12 do
-		local unit = Unit:create(UnitType.UnitTypeCarEnemy)
-		unit:setPosition(unitPos[i])
-	    self:addChild(unit)
+		self.unit[i] = Unit:create(UnitType.UnitTypeTroopEnemy)
+		self.unit[i]:setPosition(unitPos[i])
+	    self:addChild(self.unit[i])
 	end
 end

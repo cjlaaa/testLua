@@ -9,6 +9,8 @@ MainLayer = class("MainLayer",
 )
  
 MainLayer.__index = MainLayer
+MainLayer.bg = nil;
+MainLayer.unitsLayer = nil;
   
 function MainLayer:createMainLayer()
     local MainLayer = MainLayer.new()
@@ -18,10 +20,10 @@ function MainLayer:createMainLayer()
 end
  
 function MainLayer:myInit()
-    local bg = Background:create();
+    bg = Background:create();
 	self:addChild(bg)
 
-	local unitsLayer = UnitsLayer:create();
+	unitsLayer = UnitsLayer:create();
 	self:addChild(unitsLayer)
 end
 
