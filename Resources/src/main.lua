@@ -1,6 +1,5 @@
 require "src/extern"   --导入模板，作用调用其class函数
 require "src/background"
-local s = CCDirector:sharedDirector():getWinSize()
 
 MainScene = class("MainScene",
     function()
@@ -40,18 +39,18 @@ local sceneGame = CCScene:create()
 -- local hellworld = HelloWorld:scene()
 -- sceneGame:addChild(hellworld)
 
--- local ccbLayer = BackgroundLayer()
+local ccbLayer = Background:create();
 -- ccbLayer:setPosition(ccp(s.width/2,s.height/2))
--- hellworld:addChild(ccbLayer)
+sceneGame:addChild(ccbLayer)
 
-local clippingNode = CCClippingNode:create();
-sceneGame:addChild(clippingNode);
-local bg = CCSprite:create("Default-568h@2x.png");
-bg:setPosition(ccp(s.width/2,s.height/2))
-clippingNode:addChild(bg);
-local stencil = CCSprite:create("Icon-144.png")
-stencil:setPosition(ccp(s.width/2,s.height/2))
-clippingNode:setStencil(stencil);
-clippingNode:setInverted(true)
+-- local clippingNode = CCClippingNode:create();
+-- sceneGame:addChild(clippingNode);
+-- local bg = CCSprite:create("Default-568h@2x.png");
+-- bg:setPosition(ccp(s.width/2,s.height/2))
+-- clippingNode:addChild(bg);
+-- local stencil = CCSprite:create("Icon-144.png")
+-- stencil:setPosition(ccp(s.width/2,s.height/2))
+-- clippingNode:setStencil(stencil);
+-- clippingNode:setInverted(true)
 
 CCDirector:sharedDirector():runWithScene(sceneGame)
