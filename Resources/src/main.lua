@@ -35,6 +35,7 @@ end
 
 function MainLayer:onHit(shooter,target)
 	self.unitsLayer:onHit(shooter,target)
+	self.bg:onHit(target)
 end
 
 function MainLayer:onShoot(shooter,target)
