@@ -1,6 +1,7 @@
 require "src/extern"
 require "src/background"
 require "src/Units"
+require "src/Bullet"
 
 MainLayer = class("MainLayer",
     function()
@@ -11,6 +12,7 @@ MainLayer = class("MainLayer",
 MainLayer.__index = MainLayer
 MainLayer.bg = nil;
 MainLayer.unitsLayer = nil;
+MainLayer.bulletsLayer = nil;
   
 function MainLayer:createMainLayer()
     local MainLayer = MainLayer.new()
@@ -25,6 +27,9 @@ function MainLayer:myInit()
 
 	unitsLayer = UnitsLayer:create();
 	self:addChild(unitsLayer)
+
+	bulletsLayer = BulletsLayer:create();
+	self:addChild(bulletsLayer);
 end
 
 -- RunScene
