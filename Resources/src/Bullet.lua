@@ -1,3 +1,6 @@
+local bulletRunTime = 0.5
+local bulletWaitTime = bulletRunTime*2
+
 local s = CCDirector:sharedDirector():getWinSize()
 
 local unitPos = 
@@ -59,10 +62,46 @@ end
 function BulletsLayer:Init()
 	self:createClippingNode();
 
+	self:shoot(2,8)
+end
+
+function BulletsLayer:shoot(shooter,target,shooterPos)
+	if(shooterPos==nil)then
+		shooterPos = unitPos[shooter]
+	end
+
 	local b = Bullet:create();
 	self.clippingNodeLeft:addChild(b);
-	b:setPosition(unitPos[1]);
-	b:runAction(CCMoveBy:create(2, ccp(s.width-b:getPositionX(),(s.width-b:getPositionX())*0.6)));
+	self.clippingNodeLeft:retain()
+	b:setPosition(shooterPos);
+	b:setTag(target)
+
+	local function BulletTargetCallback(sender)
+		self:getParent():onHit(shooter,target);
+		sender:removeFromParentAndCleanup(true);
+	end
+
+	local function BulletShootCallback(sender)
+		local target = sender:getTag()
+		sender:removeFromParentAndCleanup(true);
+
+		local b = Bullet:create();
+		self.clippingNodeRight:addChild(b);
+		b:setPosition(ccp(0,unitPos[target].y-unitPos[target].x*0.7));
+
+		local move = CCMoveTo:create(bulletRunTime, unitPos[target])
+		local arr = CCArray:create()
+	    arr:addObject(move)
+	    arr:addObject(CCCallFuncN:create(BulletTargetCallback))
+	    b:runAction(CCSequence:create(arr))
+	end
+
+    local arr = CCArray:create()
+    local pMove = CCMoveBy:create(bulletRunTime, ccp(s.width-b:getPositionX(),(s.width-b:getPositionX())*0.7))
+    arr:addObject(pMove)
+    arr:addObject(CCDelayTime:create(bulletWaitTime))
+    arr:addObject(CCCallFuncN:create(BulletShootCallback))
+    b:runAction(CCSequence:create(arr))
 end
 
 function BulletsLayer:createClippingNode()

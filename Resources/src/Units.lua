@@ -46,6 +46,7 @@ Unit = class("Unit",
 
 Unit.__index = Unit
 Unit.Type = nil;
+Unit.animationMgr = nil;
 
 function Unit:create(unitType) 
     local Unit = Unit.new()
@@ -77,23 +78,25 @@ function Unit:Init(unitType)
 	local  node  = CCBReaderLoad(strFile,proxy,true,strName)
     local  layer = tolua.cast(node,"CCLayer")
     self:addChild(layer)
-    self:play("fire")
+
+    self.animationMgr = nil;
+    if(self.Type==UnitType.UnitTypeCarMine)then
+		self.animationMgr = tolua.cast(CarMineCCB["mAnimationManager"],"CCBAnimationManager")
+	elseif(self.Type==UnitType.UnitTypeCarEnemy)then
+		self.animationMgr = tolua.cast(CarEnemyCCB["mAnimationManager"],"CCBAnimationManager")
+	elseif(self.Type==UnitType.UnitTypeTroopMine)then
+		self.animationMgr = tolua.cast(TroopMineCCB["mAnimationManager"],"CCBAnimationManager")
+    elseif(self.Type==UnitType.UnitTypeTroopEnemy)then
+		self.animationMgr = tolua.cast(TroopEnemyCCB["mAnimationManager"],"CCBAnimationManager")
+	end
 end
 
-function Unit:play(strStatus)
-	if(self.Type==UnitType.UnitTypeCarMine)then
-		local animationMgr = tolua.cast(CarMineCCB["mAnimationManager"],"CCBAnimationManager")
-	    animationMgr:runAnimationsForSequenceNamed(strStatus)
-	elseif(self.Type==UnitType.UnitTypeCarEnemy)then
-		local animationMgr = tolua.cast(CarEnemyCCB["mAnimationManager"],"CCBAnimationManager")
-	    animationMgr:runAnimationsForSequenceNamed(strStatus)
-	elseif(self.Type==UnitType.UnitTypeTroopMine)then
-		local animationMgr = tolua.cast(TroopMineCCB["mAnimationManager"],"CCBAnimationManager")
-	    animationMgr:runAnimationsForSequenceNamed(strStatus)
-    elseif(self.Type==UnitType.UnitTypeTroopEnemy)then
-		local animationMgr = tolua.cast(TroopEnemyCCB["mAnimationManager"],"CCBAnimationManager")
-	    animationMgr:runAnimationsForSequenceNamed(strStatus)
-	end
+function Unit:onHit()
+	self.animationMgr:runAnimationsForSequenceNamed("hit")
+end
+
+function Unit:shoot(target)
+	self:getParent():onShoot(self:getTag(),target);
 end
 
 UnitsLayer = class("UnitsLayer",
@@ -117,11 +120,23 @@ function UnitsLayer:Init()
 		self.unit[i] = Unit:create(UnitType.UnitTypeTroopMine)
 		self.unit[i]:setPosition(unitPos[i])
 	    self:addChild(self.unit[i])
+	    self.unit[i]:setTag(i);
 	end
 
 	for i=7,12 do
 		self.unit[i] = Unit:create(UnitType.UnitTypeTroopEnemy)
 		self.unit[i]:setPosition(unitPos[i])
 	    self:addChild(self.unit[i])
-	end
+	    self.unit[i]:setTag(i);
+	end	
+end
+
+function UnitsLayer:onHit(shooter,target)
+	self.unit[target]:onHit()
+
+	self.unit[3]:shoot(8)
+end
+
+function UnitsLayer:onShoot(shooter,target)
+	self:getParent():onShoot(shooter,target);
 end

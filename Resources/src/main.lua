@@ -3,6 +3,7 @@ require "src/background"
 require "src/Units"
 require "src/Bullet"
 
+
 MainLayer = class("MainLayer",
     function()
         return CCLayer:create() 
@@ -22,14 +23,23 @@ function MainLayer:createMainLayer()
 end
  
 function MainLayer:myInit()
-    bg = Background:create();
-	self:addChild(bg)
+    self.bg = Background:create();
+	self:addChild(self.bg)
 
-	unitsLayer = UnitsLayer:create();
-	self:addChild(unitsLayer)
+	self.unitsLayer = UnitsLayer:create();
+	self:addChild(self.unitsLayer)
 
-	bulletsLayer = BulletsLayer:create();
-	self:addChild(bulletsLayer);
+	self.bulletsLayer = BulletsLayer:create();
+	self:addChild(self.bulletsLayer);
+end
+
+function MainLayer:onHit(shooter,target)
+	print("MainLayer:onHit"..shooter.." "..target)
+	self.unitsLayer:onHit(shooter,target)
+end
+
+function MainLayer:onShoot(shooter,target)
+	self.bulletsLayer:shoot(shooter,target);
 end
 
 -- RunScene
