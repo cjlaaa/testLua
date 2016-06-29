@@ -96,6 +96,7 @@ function Unit:onHit()
 end
 
 function Unit:shoot(target)
+	self.animationMgr:runAnimationsForSequenceNamed("fire")
 	self:getParent():onShoot(self:getTag(),target);
 end
 
@@ -134,7 +135,7 @@ end
 function UnitsLayer:onHit(shooter,target)
 	self.unit[target]:onHit()
 
-	self.unit[3]:shoot(8)
+	self.unit[8]:shoot(2)
 end
 
 function UnitsLayer:onShoot(shooter,target)

@@ -40,6 +40,7 @@ function Bullet:Init()
 	self:addChild(sp);
 	-- sp:setAnchorPoint(ccp(0.5,0.5))	
 	sp:setRotation(-30);
+	sp:setScaleY(0.3);
 end
 
 BulletsLayer = class("BulletsLayer",
@@ -71,8 +72,11 @@ function BulletsLayer:shoot(shooter,target,shooterPos)
 	end
 
 	local b = Bullet:create();
-	self.clippingNodeLeft:addChild(b);
-	self.clippingNodeLeft:retain()
+	if(shooter<7)then
+		self.clippingNodeLeft:addChild(b);
+	else
+		self.clippingNodeRight:addChild(b);
+	end
 	b:setPosition(shooterPos);
 	b:setTag(target)
 
@@ -86,8 +90,13 @@ function BulletsLayer:shoot(shooter,target,shooterPos)
 		sender:removeFromParentAndCleanup(true);
 
 		local b = Bullet:create();
-		self.clippingNodeRight:addChild(b);
-		b:setPosition(ccp(0,unitPos[target].y-unitPos[target].x*0.7));
+		if(shooter<7)then
+			self.clippingNodeRight:addChild(b);
+			b:setPosition(ccp(0,unitPos[target].y-unitPos[target].x*0.7));
+		else
+			self.clippingNodeLeft:addChild(b);
+			b:setPosition(ccp(s.width,unitPos[target].y+(s.width-unitPos[target].x)*0.7));
+		end
 
 		local move = CCMoveTo:create(bulletRunTime, unitPos[target])
 		local arr = CCArray:create()
@@ -97,7 +106,12 @@ function BulletsLayer:shoot(shooter,target,shooterPos)
 	end
 
     local arr = CCArray:create()
-    local pMove = CCMoveBy:create(bulletRunTime, ccp(s.width-b:getPositionX(),(s.width-b:getPositionX())*0.7))
+    local pMove = nil;
+	if(shooter<7)then
+		pMove = CCMoveTo:create(bulletRunTime, ccp(s.width,b:getPositionY()+(s.width-b:getPositionX())*0.7))
+	else
+		pMove = CCMoveTo:create(bulletRunTime, ccp(0,b:getPositionY()-b:getPositionX()*0.7))
+	end
     arr:addObject(pMove)
     arr:addObject(CCDelayTime:create(bulletWaitTime))
     arr:addObject(CCCallFuncN:create(BulletShootCallback))
