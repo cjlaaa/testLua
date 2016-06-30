@@ -29,7 +29,10 @@ Background = class("Background",
 Background.__index = Background   -- 用于访问
 Background.bgLeft = nil;
 Background.bgRight = nil;
-Background.objForDelete = nil;
+Background.craterArrayLeft = nil;
+Background.craterArrayRight = nil;
+Background.craterArrayLeftDeleted = nil;
+Background.craterArrayRightDeleted = nil;
 
 function Background:createLeftClippingNode()
 	local  proxy = CCBProxy:create()
@@ -89,20 +92,56 @@ function Background:create()      --自定义构造函数
 end
 
 function Background:Init()
-	self.objForDelete = CCArray:create();
+	self.craterArrayLeft = CCArray:create();
+	self.craterArrayRight = CCArray:create();
+	self.craterArrayLeftDeleted = CCArray:create();
+	self.craterArrayRightDeleted = CCArray:create();
 
     local function update(fT)
-    	print(self.objForDelete:count())
+    	self.craterArrayLeft:removeObjectsInArray(self.craterArrayLeftDeleted)
+    	self.craterArrayLeftDeleted:removeAllObjects();
+    	local i = 0
+	    local craterArrayLeftLen = self.craterArrayLeft:count()
+	    if(craterArrayLeftLen>0)then
+	    	for i = craterArrayLeftLen-1, 0,-1 do
+		        local child = tolua.cast(self.craterArrayLeft:objectAtIndex(i), "CCNode")
+		        local point = self.bgLeft:convertToWorldSpace(ccp(child:getPosition()))
+		        if(point.x<0 or point.x>s.width or point.y<0 or point.y>s.height)then
+		        	self.craterArrayLeftDeleted:addObject(child)
+		        	self.bgLeft:removeChild(child,true)
+		        end
+		    end
+	   	end
+
+	   	self.craterArrayRight:removeObjectsInArray(self.craterArrayRightDeleted)
+    	self.craterArrayRightDeleted:removeAllObjects();
+	    local craterArrayRightLen = self.craterArrayRight:count()
+	    if(craterArrayRightLen>0)then   	
+		    for i = craterArrayRightLen-1, 0,-1 do
+		        local child = tolua.cast(self.craterArrayRight:objectAtIndex(i), "CCNode")
+		        local point = self.bgRight:convertToWorldSpace(ccp(child:getPosition()))
+		        if(point.x<0 or point.x>s.width or point.y<0 or point.y>s.height)then
+		        	self.craterArrayRightDeleted:addObject(child)
+		        	self.bgRight:removeChild(child,true)
+		        end
+		    end
+	    end
     end 
 
     local scheduler = CCDirector:sharedDirector():getScheduler()
     local schedulerEntry = nil
     local function onNodeEvent(event)
         if event == "enter" then
-        	self.objForDelete:retain();
+        	self.craterArrayLeft:retain();
+        	self.craterArrayRight:retain();
+        	self.craterArrayLeftDeleted:retain()
+        	self.craterArrayRightDeleted:retain()
             schedulerEntry = scheduler:scheduleScriptFunc(update, 1.0, false)
         elseif event == "exit" then
-        	self.objForDelete:release();
+        	self.craterArrayLeft:release();
+        	self.craterArrayRight:release();
+        	self.craterArrayLeftDeleted:release()
+        	self.craterArrayRightDeleted:release()
             scheduler:unscheduleScriptEntry(schedulerEntry)
         end
     end
@@ -120,11 +159,11 @@ function Background:onHit(target,targetPos)
 	if(target<7)then
 		self.bgLeft:addChild(p);
 		p:setPosition(self.bgLeft:convertToNodeSpace(targetPos))
-		self.objForDelete:addObject(p);
+		self.craterArrayLeft:addObject(p);
 	else
 		self.bgRight:addChild(p);
 		p:setPosition(self.bgRight:convertToNodeSpace(targetPos))
-		self.objForDelete:addObject(p);
+		self.craterArrayRight:addObject(p);
 	end
 end
 

@@ -62,8 +62,6 @@ end
 
 function BulletsLayer:Init()
 	self:createClippingNode();
-
-	self:shoot(2,8)
 end
 
 function BulletsLayer:shoot(shooter,target,shooterPos)

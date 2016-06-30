@@ -130,12 +130,39 @@ function UnitsLayer:Init()
 	    self:addChild(self.unit[i])
 	    self.unit[i]:setTag(i);
 	end	
+
+	local numShoot = 0;
+
+	local function update(fT)
+		local shooter = math.random(1,12);
+		if(shooter<7)then
+			target = shooter + 6;
+		else
+			target = shooter - 6;
+		end
+
+		print(numShoot.." "..shooter.." "..target)
+		numShoot = numShoot + 1;
+		self.unit[shooter]:shoot(target)
+	end
+
+	local scheduler = CCDirector:sharedDirector():getScheduler()
+    local schedulerEntry = nil
+    local function onNodeEvent(event)
+        if event == "enter" then
+        	self:retain();
+            schedulerEntry = scheduler:scheduleScriptFunc(update, 0.01, false)
+        elseif event == "exit" then
+        	self:release();
+            scheduler:unscheduleScriptEntry(schedulerEntry)
+        end
+    end
+
+    self:registerScriptHandler(onNodeEvent)
 end
 
 function UnitsLayer:onHit(shooter,target)
 	self.unit[target]:onHit()
-
-	self.unit[8]:shoot(2)
 end
 
 function UnitsLayer:onShoot(shooter,target)
