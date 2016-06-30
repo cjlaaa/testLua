@@ -1,7 +1,7 @@
 collectgarbage("collect")
-collectgarbage("stop")
--- collectgarbage("setpause", 100)
--- collectgarbage("setstepmul", 5000)
+-- collectgarbage("stop")
+collectgarbage("setpause", 100)
+collectgarbage("setstepmul", 5000)
 
 require "src/extern"
 require "src/background"
@@ -36,6 +36,27 @@ function MainLayer:myInit()
 
 	self.bulletsLayer = BulletsLayer:create();
 	self:addChild(self.bulletsLayer);
+
+	local function update(fT)
+		self.bg:update()
+		self.unitsLayer:update()
+		self.bulletsLayer:update()
+	end
+
+	local scheduler = CCDirector:sharedDirector():getScheduler()
+    local schedulerEntry = nil
+    local function onNodeEvent(event)
+    	self.bg:onNodeEvent(event)
+		self.unitsLayer:onNodeEvent(event)
+		self.bulletsLayer:onNodeEvent(event)
+        if event == "enter" then
+            schedulerEntry = scheduler:scheduleScriptFunc(update, 0.01, false)
+        elseif event == "exit" then
+            scheduler:unscheduleScriptEntry(schedulerEntry)
+        end
+    end
+
+    self:registerScriptHandler(onNodeEvent)
 end
 
 function MainLayer:onHit(shooter,target)

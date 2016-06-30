@@ -64,6 +64,16 @@ function BulletsLayer:Init()
 	self:createClippingNode();
 end
 
+function BulletsLayer:update(fT)
+	
+end
+
+function BulletsLayer:onNodeEvent(event)
+    if event == "enter" then
+    elseif event == "exit" then
+    end
+end
+
 function BulletsLayer:shoot(shooter,target,shooterPos)
 	if(shooterPos==nil)then
 		shooterPos = unitPos[shooter]

@@ -96,58 +96,52 @@ function Background:Init()
 	self.craterArrayRight = CCArray:create();
 	self.craterArrayLeftDeleted = CCArray:create();
 	self.craterArrayRightDeleted = CCArray:create();
-
-    local function update(fT)
-    	self.craterArrayLeft:removeObjectsInArray(self.craterArrayLeftDeleted)
-    	self.craterArrayLeftDeleted:removeAllObjects();
-    	local i = 0
-	    local craterArrayLeftLen = self.craterArrayLeft:count()
-	    if(craterArrayLeftLen>0)then
-	    	for i = craterArrayLeftLen-1, 0,-1 do
-		        local child = tolua.cast(self.craterArrayLeft:objectAtIndex(i), "CCNode")
-		        local point = self.bgLeft:convertToWorldSpace(ccp(child:getPosition()))
-		        if(point.x<0 or point.x>s.width or point.y<0 or point.y>s.height)then
-		        	self.craterArrayLeftDeleted:addObject(child)
-		        	self.bgLeft:removeChild(child,true)
-		        end
-		    end
-	   	end
-
-	   	self.craterArrayRight:removeObjectsInArray(self.craterArrayRightDeleted)
-    	self.craterArrayRightDeleted:removeAllObjects();
-	    local craterArrayRightLen = self.craterArrayRight:count()
-	    if(craterArrayRightLen>0)then   	
-		    for i = craterArrayRightLen-1, 0,-1 do
-		        local child = tolua.cast(self.craterArrayRight:objectAtIndex(i), "CCNode")
-		        local point = self.bgRight:convertToWorldSpace(ccp(child:getPosition()))
-		        if(point.x<0 or point.x>s.width or point.y<0 or point.y>s.height)then
-		        	self.craterArrayRightDeleted:addObject(child)
-		        	self.bgRight:removeChild(child,true)
-		        end
-		    end
-	    end
-    end 
-
-    local scheduler = CCDirector:sharedDirector():getScheduler()
-    local schedulerEntry = nil
-    local function onNodeEvent(event)
-        if event == "enter" then
-        	self.craterArrayLeft:retain();
-        	self.craterArrayRight:retain();
-        	self.craterArrayLeftDeleted:retain()
-        	self.craterArrayRightDeleted:retain()
-            schedulerEntry = scheduler:scheduleScriptFunc(update, 1.0, false)
-        elseif event == "exit" then
-        	self.craterArrayLeft:release();
-        	self.craterArrayRight:release();
-        	self.craterArrayLeftDeleted:release()
-        	self.craterArrayRightDeleted:release()
-            scheduler:unscheduleScriptEntry(schedulerEntry)
-        end
-    end
-
-    self:registerScriptHandler(onNodeEvent)
 end
+
+function Background:update(fT)
+	self.craterArrayLeft:removeObjectsInArray(self.craterArrayLeftDeleted)
+	self.craterArrayLeftDeleted:removeAllObjects();
+	local i = 0
+    local craterArrayLeftLen = self.craterArrayLeft:count()
+    if(craterArrayLeftLen>0)then
+    	for i = craterArrayLeftLen-1, 0,-1 do
+	        local child = tolua.cast(self.craterArrayLeft:objectAtIndex(i), "CCNode")
+	        local point = self.bgLeft:convertToWorldSpace(ccp(child:getPosition()))
+	        if(point.x<0 or point.x>s.width or point.y<0 or point.y>s.height)then
+	        	self.craterArrayLeftDeleted:addObject(child)
+	        	self.bgLeft:removeChild(child,true)
+	        end
+	    end
+   	end
+
+   	self.craterArrayRight:removeObjectsInArray(self.craterArrayRightDeleted)
+	self.craterArrayRightDeleted:removeAllObjects();
+    local craterArrayRightLen = self.craterArrayRight:count()
+    if(craterArrayRightLen>0)then   	
+	    for i = craterArrayRightLen-1, 0,-1 do
+	        local child = tolua.cast(self.craterArrayRight:objectAtIndex(i), "CCNode")
+	        local point = self.bgRight:convertToWorldSpace(ccp(child:getPosition()))
+	        if(point.x<0 or point.x>s.width or point.y<0 or point.y>s.height)then
+	        	self.craterArrayRightDeleted:addObject(child)
+	        	self.bgRight:removeChild(child,true)
+	        end
+	    end
+    end
+end 
+
+function Background:onNodeEvent(event)
+	if event == "enter" then
+    	self.craterArrayLeft:retain();
+    	self.craterArrayRight:retain();
+    	self.craterArrayLeftDeleted:retain()
+    	self.craterArrayRightDeleted:retain()
+    elseif event == "exit" then
+    	self.craterArrayLeft:release();
+    	self.craterArrayRight:release();
+    	self.craterArrayLeftDeleted:release()
+    	self.craterArrayRightDeleted:release()
+    end
+end	
 
 function Background:onHit(target,targetPos)
 	if(targetPos==nil)then

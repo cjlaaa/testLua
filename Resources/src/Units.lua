@@ -108,6 +108,7 @@ UnitsLayer = class("UnitsLayer",
 
 UnitsLayer.__index = UnitsLayer
 UnitsLayer.unit = {};
+UnitsLayer.numShoot = 0;
 
 function UnitsLayer:create() 
     local UnitsLayer = UnitsLayer.new()
@@ -130,34 +131,26 @@ function UnitsLayer:Init()
 	    self:addChild(self.unit[i])
 	    self.unit[i]:setTag(i);
 	end	
+end
 
-	local numShoot = 0;
-
-	local function update(fT)
-		local shooter = math.random(1,12);
-		if(shooter<7)then
-			target = shooter + 6;
-		else
-			target = shooter - 6;
-		end
-
-		-- print(numShoot.." "..shooter.." "..target)
-		numShoot = numShoot + 1;
-		self.unit[shooter]:shoot(target)
-		print(collectgarbage("count"))
+function UnitsLayer:update(fT)
+	local shooter = math.random(1,12);
+	if(shooter<7)then
+		target = shooter + 6;
+	else
+		target = shooter - 6;
 	end
 
-	local scheduler = CCDirector:sharedDirector():getScheduler()
-    local schedulerEntry = nil
-    local function onNodeEvent(event)
-        if event == "enter" then
-            schedulerEntry = scheduler:scheduleScriptFunc(update, 0.01, false)
-        elseif event == "exit" then
-            scheduler:unscheduleScriptEntry(schedulerEntry)
-        end
-    end
+	print(self.numShoot.." "..shooter.." "..target)
+	self.numShoot = self.numShoot + 1;
+	self.unit[shooter]:shoot(target)
+	print(collectgarbage("count"))
+end
 
-    self:registerScriptHandler(onNodeEvent)
+function UnitsLayer:onNodeEvent(event)
+    if event == "enter" then
+    elseif event == "exit" then
+    end
 end
 
 function UnitsLayer:onHit(shooter,target)
