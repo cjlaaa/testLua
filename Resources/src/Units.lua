@@ -141,19 +141,18 @@ function UnitsLayer:Init()
 			target = shooter - 6;
 		end
 
-		print(numShoot.." "..shooter.." "..target)
+		-- print(numShoot.." "..shooter.." "..target)
 		numShoot = numShoot + 1;
 		self.unit[shooter]:shoot(target)
+		print(collectgarbage("count"))
 	end
 
 	local scheduler = CCDirector:sharedDirector():getScheduler()
     local schedulerEntry = nil
     local function onNodeEvent(event)
         if event == "enter" then
-        	self:retain();
             schedulerEntry = scheduler:scheduleScriptFunc(update, 0.01, false)
         elseif event == "exit" then
-        	self:release();
             scheduler:unscheduleScriptEntry(schedulerEntry)
         end
     end

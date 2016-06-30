@@ -1,3 +1,8 @@
+collectgarbage("collect")
+collectgarbage("stop")
+-- collectgarbage("setpause", 100)
+-- collectgarbage("setstepmul", 5000)
+
 require "src/extern"
 require "src/background"
 require "src/Units"
