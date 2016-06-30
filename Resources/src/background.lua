@@ -16,6 +16,17 @@ local unitPos =
 	ccp(s.width*(2.5/4),s.height*(5/6)),
 	ccp(s.width*(3.5/4),s.height*(4.5/6)),
 }
+CarMineCCB = CarMineCCB or {}
+ccb["car1"] = CarMineCCB
+
+CarEnemyCCB = CarEnemyCCB or {}
+ccb["car2"] = CarEnemyCCB
+
+TroopMineCCB = TroopMineCCB or {}
+ccb["troop1"] = TroopMineCCB
+
+TroopEnemyCCB = TroopEnemyCCB or {}
+ccb["troop2"] = TroopEnemyCCB
 
 BackgroundCCB = BackgroundCCB or {}
 ccb["Background"] = BackgroundCCB
@@ -161,11 +172,32 @@ function Background:onHit(target,targetPos)
 	end
 end
 
--- function OnBtnClicked()
-	-- local animationMgr = tolua.cast(BackgroundCCB["mAnimationManager"],"CCBAnimationManager")
- --    animationMgr:runAnimationsForSequenceNamedTweenDuration("right", 0.1)
+function Background:onDead(target,targetPos)
+	if(targetPos==nil)then
+		targetPos = unitPos[target]
+	end
 
-    -- local bg = tolua.cast(BackgroundCCB["background"],"CCSprite")
-    -- print(bg:getPositionX().." "..bg:getPositionY())
--- end
--- BackgroundCCB["onBtnClick"] = OnBtnClicked
+	if(target<7)then
+		local  proxy = CCBProxy:create()
+		local  node  = CCBReaderLoad("ccb/troop1.ccbi",proxy,true,"car1")
+	    local  p = tolua.cast(node,"CCLayer")
+	    p:setScaleX(0.5)
+	    local animationMgr = tolua.cast(TroopMineCCB["mAnimationManager"],"CCBAnimationManager")
+	    animationMgr:runAnimationsForSequenceNamed("dead")
+
+	    self.bgLeft:addChild(p);
+		p:setPosition(self.bgLeft:convertToNodeSpace(targetPos))
+		self.craterArrayLeft:addObject(p);
+	else
+		local  proxy = CCBProxy:create()
+		local  node  = CCBReaderLoad("ccb/troop2.ccbi",proxy,true,"car2")
+	    local  p = tolua.cast(node,"CCLayer")
+	    p:setScaleX(0.5)
+	    local animationMgr = tolua.cast(TroopEnemyCCB["mAnimationManager"],"CCBAnimationManager")
+	    animationMgr:runAnimationsForSequenceNamed("dead")
+
+	    self.bgRight:addChild(p);
+		p:setPosition(self.bgRight:convertToNodeSpace(targetPos))
+		self.craterArrayRight:addObject(p);
+	end
+end

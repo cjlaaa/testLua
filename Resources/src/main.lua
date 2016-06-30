@@ -54,7 +54,7 @@ function MainLayer:myInit()
 		self.unitsLayer:onNodeEvent(event)
 		self.bulletsLayer:onNodeEvent(event)
         if event == "enter" then
-            -- schedulerEntry = scheduler:scheduleScriptFunc(update, 0.01, false)
+            schedulerEntry = scheduler:scheduleScriptFunc(update, 1, false)
         elseif event == "exit" then
             scheduler:unscheduleScriptEntry(schedulerEntry)
         end
@@ -70,6 +70,10 @@ end
 
 function MainLayer:onShoot(shooter,target)
 	self.bulletsLayer:shoot(shooter,target);
+end
+
+function MainLayer:onDead(target)
+    self.bg:onDead(target);
 end
 
 -- RunScene

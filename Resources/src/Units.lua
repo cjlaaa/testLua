@@ -95,6 +95,11 @@ function Unit:onHit()
 	self.animationMgr:runAnimationsForSequenceNamed("hit")
 end
 
+function Unit:onDead()
+	self:getParent():onDead(self:getTag());
+	self:removeFromParentAndCleanup(true);
+end
+
 function Unit:shoot(target)
 	self.animationMgr:runAnimationsForSequenceNamed("fire")
 	self:getParent():onShoot(self:getTag(),target);
@@ -131,6 +136,16 @@ function UnitsLayer:Init()
 	    self:addChild(self.unit[i])
 	    self.unit[i]:setTag(i);
 	end	
+
+	-- function testCallback()
+	-- 	self.unit[2]:onDead();
+	-- 	self.unit[7]:onDead();
+	-- end
+
+	-- local arr = CCArray:create()
+ --    arr:addObject(CCDelayTime:create(1))
+ --    arr:addObject(CCCallFuncN:create(testCallback))
+ --    self:runAction(CCSequence:create(arr))
 end
 
 function UnitsLayer:update(fT)
@@ -141,10 +156,10 @@ function UnitsLayer:update(fT)
 		target = shooter - 6;
 	end
 
-	print(self.numShoot.." "..shooter.." "..target)
+	-- print(self.numShoot.." "..shooter.." "..target)
 	self.numShoot = self.numShoot + 1;
 	self.unit[shooter]:shoot(target)
-	print(collectgarbage("count"))
+	-- print(collectgarbage("count"))
 end
 
 function UnitsLayer:onNodeEvent(event)
@@ -159,4 +174,8 @@ end
 
 function UnitsLayer:onShoot(shooter,target)
 	self:getParent():onShoot(shooter,target);
+end
+
+function UnitsLayer:onDead(target)
+	self:getParent():onDead(target);
 end
