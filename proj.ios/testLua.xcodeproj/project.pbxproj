@@ -18,6 +18,10 @@
 		0F3364EF1D210F790072631C /* ccbResources in Resources */ = {isa = PBXBuildFile; fileRef = 0F3364ED1D210F790072631C /* ccbResources */; };
 		0F7003CD1D23602E00825650 /* dandao_00000.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F7003CB1D23602E00825650 /* dandao_00000.png */; };
 		0F7003CE1D23602E00825650 /* keng.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F7003CC1D23602E00825650 /* keng.png */; };
+		0FAD1AB31D25167800B5961B /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD1AAB1D25167800B5961B /* fpconv.c */; };
+		0FAD1AB41D25167800B5961B /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD1AAD1D25167800B5961B /* lua_cjson.c */; };
+		0FAD1AB61D25167800B5961B /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD1AB11D25167800B5961B /* strbuf.c */; };
+		0FAD1AB91D251BD800B5961B /* lua_extensions.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD1AB71D251BD800B5961B /* lua_extensions.c */; };
 		15C153F71683112E00D239F2 /* CCBAnimationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */; };
 		15C153F81683112E00D239F2 /* CCBFileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C1537E1683112E00D239F2 /* CCBFileLoader.cpp */; };
 		15C153F91683112E00D239F2 /* CCBKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15C153801683112E00D239F2 /* CCBKeyframe.cpp */; };
@@ -252,6 +256,14 @@
 		0F3364ED1D210F790072631C /* ccbResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccbResources; sourceTree = "<group>"; };
 		0F7003CB1D23602E00825650 /* dandao_00000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dandao_00000.png; sourceTree = "<group>"; };
 		0F7003CC1D23602E00825650 /* keng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keng.png; sourceTree = "<group>"; };
+		0FAD1AAB1D25167800B5961B /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fpconv.c; sourceTree = "<group>"; };
+		0FAD1AAC1D25167800B5961B /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fpconv.h; sourceTree = "<group>"; };
+		0FAD1AAD1D25167800B5961B /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_cjson.c; sourceTree = "<group>"; };
+		0FAD1AAE1D25167800B5961B /* lua_cjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_cjson.h; sourceTree = "<group>"; };
+		0FAD1AB11D25167800B5961B /* strbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strbuf.c; sourceTree = "<group>"; };
+		0FAD1AB21D25167800B5961B /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strbuf.h; sourceTree = "<group>"; };
+		0FAD1AB71D251BD800B5961B /* lua_extensions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_extensions.c; sourceTree = "<group>"; };
+		0FAD1AB81D251BD800B5961B /* lua_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_extensions.h; sourceTree = "<group>"; };
 		15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		15C1537C1683112E00D239F2 /* CCBAnimationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBAnimationManager.cpp; sourceTree = "<group>"; };
 		15C1537D1683112E00D239F2 /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
@@ -657,6 +669,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FAD1AAA1D25167800B5961B /* cjson */ = {
+			isa = PBXGroup;
+			children = (
+				0FAD1AB71D251BD800B5961B /* lua_extensions.c */,
+				0FAD1AB81D251BD800B5961B /* lua_extensions.h */,
+				0FAD1AAB1D25167800B5961B /* fpconv.c */,
+				0FAD1AAC1D25167800B5961B /* fpconv.h */,
+				0FAD1AAD1D25167800B5961B /* lua_cjson.c */,
+				0FAD1AAE1D25167800B5961B /* lua_cjson.h */,
+				0FAD1AB11D25167800B5961B /* strbuf.c */,
+				0FAD1AB21D25167800B5961B /* strbuf.h */,
+			);
+			name = cjson;
+			path = ../Classes/cjson;
+			sourceTree = "<group>";
+		};
 		15C1533F168310C700D239F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1379,6 +1407,7 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0FAD1AAA1D25167800B5961B /* cjson */,
 				0F127D2A1D0E6E5B00B6256A /* AppMacros.h */,
 				0F127D2B1D0E6E5C00B6256A /* HelloWorldScene.cpp */,
 				0F127D2C1D0E6E5C00B6256A /* HelloWorldScene.h */,
@@ -1602,6 +1631,7 @@
 				15C1549B1683116B00D239F2 /* cpCollision.c in Sources */,
 				15C1549C1683116B00D239F2 /* cpHashSet.c in Sources */,
 				15C1549D1683116B00D239F2 /* cpPolyShape.c in Sources */,
+				0FAD1AB31D25167800B5961B /* fpconv.c in Sources */,
 				15C1549E1683116B00D239F2 /* cpShape.c in Sources */,
 				15C1549F1683116B00D239F2 /* cpSpace.c in Sources */,
 				15C154A01683116B00D239F2 /* cpSpaceComponent.c in Sources */,
@@ -1611,6 +1641,7 @@
 				15C154A41683116B00D239F2 /* cpSpatialIndex.c in Sources */,
 				15C154A51683116B00D239F2 /* cpSweep1D.c in Sources */,
 				15C154A61683116B00D239F2 /* cpVect.c in Sources */,
+				0FAD1AB61D25167800B5961B /* strbuf.c in Sources */,
 				15C1551F1683118600D239F2 /* b2BroadPhase.cpp in Sources */,
 				15C155201683118600D239F2 /* b2CollideCircle.cpp in Sources */,
 				15C155211683118600D239F2 /* b2CollideEdge.cpp in Sources */,
@@ -1644,7 +1675,9 @@
 				15C1553D1683118600D239F2 /* b2EdgeAndPolygonContact.cpp in Sources */,
 				15C1553E1683118600D239F2 /* b2PolygonAndCircleContact.cpp in Sources */,
 				15C1553F1683118600D239F2 /* b2PolygonContact.cpp in Sources */,
+				0FAD1AB41D25167800B5961B /* lua_cjson.c in Sources */,
 				15C155401683118600D239F2 /* b2DistanceJoint.cpp in Sources */,
+				0FAD1AB91D251BD800B5961B /* lua_extensions.c in Sources */,
 				15C155411683118600D239F2 /* b2FrictionJoint.cpp in Sources */,
 				15C155421683118600D239F2 /* b2GearJoint.cpp in Sources */,
 				15C155431683118600D239F2 /* b2Joint.cpp in Sources */,
