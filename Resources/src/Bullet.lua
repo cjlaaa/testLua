@@ -1,5 +1,5 @@
-local bulletRunTime = 0.5
-local bulletWaitTime = bulletRunTime*2
+local bulletRunTime = 0.3
+local bulletWaitTime = bulletRunTime*4
 
 local s = CCDirector:sharedDirector():getWinSize()
 

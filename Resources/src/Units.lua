@@ -1,6 +1,10 @@
 require "CCBReaderLoad"
 local s = CCDirector:sharedDirector():getWinSize()
 
+local cjson = require "cjson"
+local jsonData = "{\"report\":{\"p\":[[1,6,0],[\"fgggg\",10,1]],\"t\":[[[\"a10001\",7],[\"a10011\",6],[\"a10011\",8],[\"a10001\",6],[\"a10001\",7],[\"a10001\",7]],[[\"a10032\",5],{},{},{},{},{}]],\"h\":[{},{}],\"r\":-1,\"d\":[[\"240-6\",\"192-4\",\"192-6\",\"240-5\",\"240-6\",\"240-6\"],[\"193-5\"],[\"189-4\"],[\"283-4\"],[\"161-3\"],[\"193-3\"],[\"193-2\"],[\"96-5\",\"77-3\",\"77-5\",\"96-4\",\"96-5\",\"96-5\"],[\"161-2\"],[\"142-1\"],[\"236-1\"],[\"129-0\"]]},\"aey\":[[0,[0,0,0,0]],{}],\"rp\":[0,0],\"resource\":{},\"type\":1,\"info\":{\"defenserName\":\"\",\"AttackerPlace\":[247,211],\"attackerLevel\":10,\"aLandform\":4,\"islandLevel\":6,\"islandType\":1,\"AAName\":\"\",\"defenser\":0,\"attackerName\":\"fgggg\",\"attacker\":9000010,\"reputation\":0,\"DAName\":\"\",\"isVictory\":0,\"dLandform\":1,\"ts\":1417975617,\"place\":[251,213],\"islandOwner\":0,\"defenserLevel\":0},\"destroy\":{\"defenser\":{\"a10001\":8,\"a10011\":6},\"attacker\":{\"a10032\":5}},\"hh\":[[{},0],[{},0]]}"
+local data = cjson.decode(jsonData)
+
 CarMineCCB = CarMineCCB or {}
 ccb["car1"] = CarMineCCB
 
@@ -47,6 +51,9 @@ Unit = class("Unit",
 Unit.__index = Unit
 Unit.Type = nil;
 Unit.animationMgr = nil;
+Unit.index = 0;
+Unit.id = "";
+Unit.num = 0;
 
 function Unit:create(unitType) 
     local Unit = Unit.new()
@@ -91,6 +98,10 @@ function Unit:Init(unitType)
 	end
 end
 
+function Unit:update(fT)
+
+end
+
 function Unit:onHit()
 	self.animationMgr:runAnimationsForSequenceNamed("hit")
 end
@@ -100,7 +111,37 @@ function Unit:onDead()
 	self:removeFromParentAndCleanup(true);
 end
 
+function Unit:shootAll()
+	local curTarget = 0;
+	
+	if(self:getTag()<7)then
+		curTarget = 7
+	else
+		curTarget = 1
+	end
+
+	function shootAllCallback()
+		self:shoot(curTarget)
+		curTarget = curTarget + 1;
+	end
+
+	local arr = CCArray:create()
+    for i=1,6 do
+    	arr:addObject(CCCallFunc:create(shootAllCallback))
+	    arr:addObject(CCDelayTime:create(0.2))
+    end
+    self:runAction(CCSequence:create(arr))
+end
+
 function Unit:shoot(target)
+	if(target==nil)then
+		if(self:getTag()<7)then
+			target = self:getTag() + 6;
+		else
+			target = self:getTag() - 6;
+		end
+	end
+
 	self.animationMgr:runAnimationsForSequenceNamed("fire")
 	self:getParent():onShoot(self:getTag(),target);
 end
@@ -114,6 +155,7 @@ UnitsLayer = class("UnitsLayer",
 UnitsLayer.__index = UnitsLayer
 UnitsLayer.unit = {};
 UnitsLayer.numShoot = 0;
+UnitsLayer.ShooterQueue = {}
 
 function UnitsLayer:create() 
     local UnitsLayer = UnitsLayer.new()
@@ -124,24 +166,82 @@ end
 
 function UnitsLayer:Init()
 	for i=1,6 do
-		self.unit[i] = Unit:create(UnitType.UnitTypeTroopMine)
-		self.unit[i]:setPosition(unitPos[i])
-	    self:addChild(self.unit[i])
-	    self.unit[i]:setTag(i);
+		if(data.report.t[1][i][1]~=nil)then
+			self.unit[i] = Unit:create(UnitType.UnitTypeTroopMine)
+			self.unit[i]:setPosition(unitPos[i])
+		    self:addChild(self.unit[i])
+		    self.unit[i]:setTag(i);
+		end
 	end
 
 	for i=7,12 do
-		self.unit[i] = Unit:create(UnitType.UnitTypeTroopEnemy)
-		self.unit[i]:setPosition(unitPos[i])
-	    self:addChild(self.unit[i])
-	    self.unit[i]:setTag(i);
+		if(data.report.t[2][i-6][1]~=nil)then
+			self.unit[i] = Unit:create(UnitType.UnitTypeTroopEnemy)
+			self.unit[i]:setPosition(unitPos[i])
+		    self:addChild(self.unit[i])
+		    self.unit[i]:setTag(i);
+		end
 	end	
-	
-	-- self:testDead();
+
+	self:setActionQueue();
+end
+
+function UnitsLayer:setActionQueue()
+	self:initShooterQueue();
+
+	local curShooter = 0;
+	function getCurShooter()
+		curShooter = curShooter + 1;
+		if(curShooter > #self.ShooterQueue)then
+			curShooter = 1;
+		end
+		return self.ShooterQueue[curShooter];
+	end
+
+	function setQueueCallbackShootAll()
+		self.unit[getCurShooter()]:shootAll();
+	end
+
+	function setQueueCallbackShoot()
+		self.unit[getCurShooter()]:shoot();
+	end
+
+	local arr = CCArray:create()
+    for i=1,#data.report.d do
+		if(#data.report.d[i]==6)then
+			arr:addObject(CCCallFunc:create(setQueueCallbackShootAll))
+		    arr:addObject(CCDelayTime:create(4))
+		else
+			arr:addObject(CCCallFunc:create(setQueueCallbackShoot))
+		    arr:addObject(CCDelayTime:create(2))
+		end
+	end
+    self:runAction(CCSequence:create(arr))
+end
+
+function UnitsLayer:initShooterQueue()
+	local first,second,value1,velue2 = 0,0,0,0
+	if(data.report.p[1][3]==1)then
+		first,second,value1,value2 = 1,2,0,6
+	else
+		first,second,value1,value2 = 2,1,6,0
+	end
+
+	for i=1,6 do
+		if(data.report.t[first][i][1]~=nil)then
+			table.insert(self.ShooterQueue,i+value1)
+		end
+
+		if(data.report.t[second][i][1]~=nil)then
+			table.insert(self.ShooterQueue,i+value2)
+		end
+	end
 end
 
 function UnitsLayer:update(fT)
-	-- self:testShoot();
+	for i=1,#self.unit do
+		self.unit[i]:update(fT);
+	end
 end
 
 function UnitsLayer:onNodeEvent(event)
@@ -151,7 +251,9 @@ function UnitsLayer:onNodeEvent(event)
 end
 
 function UnitsLayer:onHit(shooter,target)
-	self.unit[target]:onHit()
+	if(self.unit[target]~=nil)then
+		self.unit[target]:onHit()
+	end
 end
 
 function UnitsLayer:onShoot(shooter,target)
@@ -163,7 +265,7 @@ function UnitsLayer:onDead(target)
 end
 
 function UnitsLayer:testDead()
-	-- test dead
+	-- test dead in Init
 	function testCallback()
 		self.unit[2]:onDead();
 		self.unit[7]:onDead();
@@ -175,7 +277,7 @@ function UnitsLayer:testDead()
 end
 
 function UnitsLayer:testShoot()
-	-- test shoot
+	-- test shoot in update
 	local shooter = math.random(1,12);
 	if(shooter<7)then
 		target = shooter + 6;

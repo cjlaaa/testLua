@@ -11,7 +11,8 @@ require "src/Bullet"
 local cjson = require "cjson"
 local jsonData = "{\"report\":{\"p\":[[1,6,0],[\"fgggg\",10,1]],\"t\":[[[\"a10001\",7],[\"a10011\",6],[\"a10011\",8],[\"a10001\",6],[\"a10001\",7],[\"a10001\",7]],[[\"a10032\",5],{},{},{},{},{}]],\"h\":[{},{}],\"r\":-1,\"d\":[[\"240-6\",\"192-4\",\"192-6\",\"240-5\",\"240-6\",\"240-6\"],[\"193-5\"],[\"189-4\"],[\"283-4\"],[\"161-3\"],[\"193-3\"],[\"193-2\"],[\"96-5\",\"77-3\",\"77-5\",\"96-4\",\"96-5\",\"96-5\"],[\"161-2\"],[\"142-1\"],[\"236-1\"],[\"129-0\"]]},\"aey\":[[0,[0,0,0,0]],{}],\"rp\":[0,0],\"resource\":{},\"type\":1,\"info\":{\"defenserName\":\"\",\"AttackerPlace\":[247,211],\"attackerLevel\":10,\"aLandform\":4,\"islandLevel\":6,\"islandType\":1,\"AAName\":\"\",\"defenser\":0,\"attackerName\":\"fgggg\",\"attacker\":9000010,\"reputation\":0,\"DAName\":\"\",\"isVictory\":0,\"dLandform\":1,\"ts\":1417975617,\"place\":[251,213],\"islandOwner\":0,\"defenserLevel\":0},\"destroy\":{\"defenser\":{\"a10001\":8,\"a10011\":6},\"attacker\":{\"a10032\":5}},\"hh\":[[{},0],[{},0]]}"
 local data = cjson.decode(jsonData)
-print(data.report.p[2][1]) 
+-- print(data.report.t[2][2][1]) 
+-- print(table.getn(data.report.d))  
 
 MainLayer = class("MainLayer",
     function()
@@ -54,7 +55,7 @@ function MainLayer:myInit()
 		self.unitsLayer:onNodeEvent(event)
 		self.bulletsLayer:onNodeEvent(event)
         if event == "enter" then
-            schedulerEntry = scheduler:scheduleScriptFunc(update, 1, false)
+            schedulerEntry = scheduler:scheduleScriptFunc(update, 0.01, false)
         elseif event == "exit" then
             scheduler:unscheduleScriptEntry(schedulerEntry)
         end
